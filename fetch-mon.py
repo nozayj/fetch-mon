@@ -16,6 +16,10 @@ from rich.align import Align
 console = Console()
 
 def get_distro():
+    system = platform.system().lower()
+    if system != "linux":
+       return "nonlinux"
+
     try:
         f = open("/etc/os-release", "r")
         lines = f.readlines()
@@ -127,7 +131,16 @@ ASCII_LOGOS = {
      \    YP"      `| 8P  `.
      /     \._____.d|    .'
      `--..__)888888P`._.'
-   """  
+   """,
+ 
+   "nonlinux" : """
+        ████████████████
+        ██            ██
+        ██  NON-LINUX ██
+        ██   SYSTEM   ██
+        ██            ██
+        ████████████████
+    """
 }
 
 ASCII_LOGO = ASCII_LOGOS.get(distro, ASCII_LOGOS["linuxgen"])
