@@ -16,13 +16,19 @@ from rich.align import Align
 console = Console()
 
 ASCII_LOGO = r"""  
-    ___      
-   (.· |     
-   (<> |
-  / __  \
- ( /  \ /|
-_/\ __)/_)
-\/-____\/
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣷⣤⣙⢻⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⡿⠛⠛⠿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀⠙⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⠿⣆⠀⠀⠀⠀
+⠀⠀⠀⣴⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀
+⠀⢀⣾⣿⣿⠿⠟⠛⠋⠉⠉⠀⠀⠀⠀⠀⠀⠉⠉⠙⠛⠻⠿⣿⣿⣷⡀⠀
+⣠⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⣄
 """
 
 class UsageBar(ProgressColumn):
@@ -46,14 +52,16 @@ def get_temperature():
 
 def build_cpu_table():
     cpu_percents = psutil.cpu_percent(percpu=True, interval=0.1)
-    cpu_table = Table.grid()
+    cpu_table = Table.grid(padding=(0, 2))
     for i in range(0, len(cpu_percents), 4):
         row = []
         for j in range(4):
             if i + j < len(cpu_percents):
                 pct = cpu_percents[i + j]
                 bar = "█" * int(pct / 10) + "░" * (10 - int(pct / 10))
-                row.append(Text(f"Core {i+j}: {bar} {pct:.1f}%", style="bold blue"))
+                row.append(Text(f"Core {i+j}: {bar} {pct:.1f}%  ", style="bold blue"))
+            else:
+                row.append(Text(""))
         cpu_table.add_row(*row)
         cpu_table.add_row()
     return cpu_table
@@ -80,6 +88,7 @@ def render_dashboard():
 
     usage_group = Group(
         Text.from_markup(
+            f""
             f"[bold]Host:[/] {hostname}\n\n"
             f"[bold]OS:[/] {os_name} {os_version}\n\n"
             f"[bold]Uptime:[/] {uptime}\n\n"
@@ -87,7 +96,7 @@ def render_dashboard():
             f"\n[bold]CPU Usage:[/]"
         ),
         cpu_table,
-        Text.from_markup(f"\n[bold]MEM: {mem_total//(1024**3)} GB | DISK: {disk_total//(1024**3)} GB[/]"),
+        Text.from_markup(f"\n[bold]MEM: {mem_total//(1024**3)} GB | DISK: {disk_total//(1024**3)} GB[/] "),
         memdisk_progress
     )
 
