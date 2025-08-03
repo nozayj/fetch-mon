@@ -16,34 +16,27 @@ from rich.align import Align
 console = Console()
 
 def get_distro():
-   try:
-       f = open("/etc/os-release", "r")
-       lines = f.readlines()
-       f.close()
-       for line in lines:
-           if line.startswith("ID="):
-               distro = line.split("=")[1].strip().replace('"', '')
-               return distro.lower()
-   except:
-       pass
-   
-   try:
-       open("/etc/arch-release")
-       return "arch"
-   except:
-       pass
-   try:
-       open("/etc/fedora-release")
-       return "fedora"
-   except:
-       pass
-   try:
-       open("/etc/debian_version")
-       return "ubuntu"
-   except:
-       pass
-   
-   return "linuxgen"
+    try:
+        f = open("/etc/os-release", "r")
+        lines = f.readlines()
+        f.close()
+        for line in lines:
+            if line.startswith("ID="):
+                distro = line.split("=")[1].strip().replace('"', '')
+                if distro == "archarm":
+                    return "arch"
+                return distro.lower()
+    except:
+        pass
+    
+    if os.path.exists("/etc/arch-release"):
+        return "arch"
+    if os.path.exists("/etc/fedora-release"):
+        return "fedora"
+    if os.path.exists("/etc/debian_version"):
+        return "ubuntu"
+    
+    return "linuxgen"
 
 distro = get_distro()
 
