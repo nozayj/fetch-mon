@@ -207,12 +207,12 @@ def render_dashboard():
    mem_total, disk_total, mem_pct, disk_pct, memdisk_progress = build_mem_disk_progress()
    usage_group = Group(
        Text.from_markup(
-           f"[bold]Username:[/] {username}\n\n"
-           f"[bold]Host:[/] {hostname}\n\n"
-           f"[bold]OS:[/] {os_name} {os_version}\n\n"
-           f"[bold]Uptime:[/] {uptime}\n\n"
-           f"[bold]Temp:[/] {temp}\n\n"
-           f"\n[bold]CPU Usage:[/]"
+           f"\n[bold]Username:[/] {username}\n"
+           f"[bold]Host:[/] {hostname}\n"
+           f"[bold]OS:[/] {os_name} {os_version}\n"
+           f"[bold]Uptime:[/] {uptime}\n"
+           f"[bold]Temp:[/] {temp}\n"
+           f"\n\n[bold]CPU Usage:[/]"
        ),
        cpu_table,
        Text.from_markup(f"\n[bold]MEM: {mem_total//(1024**3)} GB | DISK: {disk_total//(1024**3)} GB[/] "),
