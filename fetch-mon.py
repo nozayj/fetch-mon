@@ -7,6 +7,7 @@ import datetime
 import subprocess
 import time
 import re
+import getpass
 from shutil import get_terminal_size
 from rich.live import Live
 from rich.console import Console, Group
@@ -104,7 +105,7 @@ ASCII_LOGOS = {
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 
-   """,⠀⠀⠀⠀⠀⠀⠀
+   """,
 
    "linuxgen" : r"""
 
@@ -175,7 +176,7 @@ def build_cpu_table():
    cpu_table = Table.grid(padding=(0, 2))
    for i in range(0, len(cpu_percents), 4):
        row = []
-       for j in range(4):
+       for j in range(4):   
            if i + j < len(cpu_percents):
                pct = cpu_percents[i + j]
                bar = "█" * int(pct / 10) + "░" * (10 - int(pct / 10))
@@ -197,6 +198,7 @@ def build_mem_disk_progress():
    return mem.total, disk.total, mem.percent, disk.percent, progress
 
 def render_dashboard():
+   username = getpass.getuser()
    os_name, os_version, hostname = platform.system(), platform.release(), platform.node()
    uptime = get_uptime()
    temp = get_temperature()
@@ -205,7 +207,7 @@ def render_dashboard():
    mem_total, disk_total, mem_pct, disk_pct, memdisk_progress = build_mem_disk_progress()
    usage_group = Group(
        Text.from_markup(
-           f""
+           f"[bold]Username:[/] {username}\n\n"
            f"[bold]Host:[/] {hostname}\n\n"
            f"[bold]OS:[/] {os_name} {os_version}\n\n"
            f"[bold]Uptime:[/] {uptime}\n\n"
