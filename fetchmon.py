@@ -40,11 +40,12 @@ def get_distro():
         return "arch"
     if os.path.exists("/etc/fedora-release"):
         return "fedora"
-    if os.path.exists("/etc/debian_version"):
+    if os.path.exists("/etc/ubuntu_version"):
         return "ubuntu"
     if os.path.exists("/etc/linuxmint/info"):
         return "linuxmint"
-    
+    if os.path.exists("/etc/debian_version"):
+        return "debian"
     
     return "linuxgen"
 
@@ -128,6 +129,31 @@ ASCII_LOGOS = {
 
    """,
 
+   "debian" : r"""
+
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⣾⡿⣿⡿⣷⣾⣿⢿⣶⣦⣄⣠⡀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⣴⣾⣿⣟⣯⣷⡿⠟⠙⠛⠓⠛⠛⠟⢾⣟⣿⣻⣶⣦⡀⠀⠀⠀
+⠀⠀⠀⠀⣴⣿⢿⣻⡾⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⢯⣷⣿⣻⣦⡀⠀
+⠀⡀⠀⣾⡿⣯⠟⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣾⡿⣽⣷⡀
+⠀⢠⣾⡿⠝⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠘⣿⣻⡉⠇
+⢁⣿⣟⡗⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡶⠛⠉⠉⠉⠁⠢⠀⠀⠀⠀⠀⢹⣟⡗⠐
+⢼⣿⡝⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡿⣿⠀
+⢸⣯⡇⠀⠀⠀⠀⠀⠀⠀⠀⢰⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⠀⠀⠀⢸⣿⣻⠀
+⢸⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣇⠀⠀⠀⠀⠀⠀⠀⠀⠄⠀⠀⠀⠀⣼⡿⠁⠁
+⢸⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠨⢿⣄⠀⠀⠀⠀⠤⠀⠀⠀⠀⠀⢀⣾⡟⠇⠈⠀
+⢸⣯⡇⠀⠀⠀⠀⠀⠀⠀⠀⠡⡃⠻⢦⣄⠀⠀⠀⠀⠀⠀⣀⣴⡿⠋⠁⠀⠀⠀
+⠈⣿⣳⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠒⠽⡛⠷⠶⠶⠿⠛⠋⠁⠀⠀⠀⠀⠀⠀
+⠀⠸⣿⣻⡷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠹⣯⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠙⢷⣷⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠈⠻⣽⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠈⠻⢿⣦⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⠷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+
+   """,
+
    "linuxgen" : r"""
 
              a8888b.
@@ -172,6 +198,7 @@ ASCII_LOGOS = {
 }
 
 ASCII_LOGO = ASCII_LOGOS.get(distro, ASCII_LOGOS["linuxgen"])
+#ASCII_LOGO = ASCII_LOGOS.get("") #In order to chose prefered art, enter the chosen distro here, uncomment this line, comment the above line, and save.
 
 class UsageBar(ProgressColumn):
    def render(self, task):
